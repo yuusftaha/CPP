@@ -15,9 +15,15 @@ void Contact::setNickName(std::string nickName)
     this->nickName = nickName;
 }
 
-void Contact::setPhoneNumber(std::string phoneNumber)
+bool Contact::setPhoneNumber(std::string phoneNumber)
 {
+    for (size_t i = 0; phoneNumber[i] ; i++)
+    {
+        if (phoneNumber[i] < '0' || phoneNumber[i] > '9')
+            return false;
+    }
     this->phoneNumber = phoneNumber;
+    return true;
 }
 
 void Contact::setDarkestSecret(std::string darkestSecret)
