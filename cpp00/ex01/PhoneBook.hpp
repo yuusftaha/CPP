@@ -12,10 +12,13 @@ class PhoneBook
 
     public:
     PhoneBook();
-    bool addContact();
+    void addContact();
     void searchContact();
     int getCurrentIndex();
     void setCurrentIndex(int count);
 };
+
+void checkIsEmpty(std::string &value, std::string msg, std::string valuetype);
+void checkPhoneNum(std::string &num);
 
 #endif

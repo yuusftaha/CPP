@@ -16,11 +16,7 @@ int main()
 
 		if (value == "ADD")
 		{
-			if (!phonebook.addContact())
-			{
-				/* HATA DURUMU */
-			}
-			
+			phonebook.addContact();	
 		}
 		else if (value == "SEARCH")
 		{
@@ -31,8 +27,11 @@ int main()
 		}
 		else if (value == "EXIT")
 		{
-			/* code */
+			std::cout << "Program is terminated." << std::endl;
+			std::exit(0);
 		}
+		else
+			std::cout << "invalid entry" << std::endl;
 	}
 	return 0;
 }

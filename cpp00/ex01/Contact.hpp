@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cstdlib>
 
 class Contact
 {
@@ -20,7 +21,7 @@ class Contact
     void setFirstName(std::string firstName);
     void setLastName(std::string lastName);
     void setNickName(std::string nickName);
-    bool setPhoneNumber(std::string phoneNumber);
+    void setPhoneNumber(std::string phoneNumber);
     void setDarkestSecret(std::string darkestSecret);
 
     std::string getFirstName();
