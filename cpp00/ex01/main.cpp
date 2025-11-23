@@ -12,7 +12,8 @@ int main()
 		std::cout << "*           ADD    |    SEARCH    |    EXIT           *" << std::endl;
 		std::cout << "*******************************************************" << std::endl;
 
-		std::getline(std::cin, value);
+		if (!std::getline(std::cin, value))
+        	exit(0);
 
 		if (value == "ADD")
 		{

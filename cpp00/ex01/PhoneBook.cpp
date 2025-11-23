@@ -58,28 +58,33 @@ void PhoneBook::addContact()
         setCurrentIndex(-8);
         
     std::cout << "First Name = ";
-    std::getline(std::cin, value);
+    if (!std::getline(std::cin, value))
+        exit(0);
     checkIsEmpty(value, "First Name cannot be left blank", "First Name = ");
     this->contact[getCurrentIndex()].setFirstName(value);
 
     std::cout << "Last Name = ";
-    std::getline(std::cin, value);
+    if (!std::getline(std::cin, value))
+        exit(0);
     checkIsEmpty(value, "Last Name cannot be left blank", "Last Name = ");
     this->contact[getCurrentIndex()].setLastName(value);
 
     std::cout << "Nick Name = ";
-    std::getline(std::cin, value);
+    if (!std::getline(std::cin, value))
+        exit(0);
     checkIsEmpty(value, "Nick Name cannot be left blank", "Nick Name = ");
     this->contact[getCurrentIndex()].setNickName(value);
     
     std::cout << "Phone Number = ";
-    std::getline(std::cin, value);
+    if (!std::getline(std::cin, value))
+        exit(0);
     checkIsEmpty(value, "Phone Number cannot be left blank", "Phone Number = ");
     checkPhoneNum(value);
     this->contact[getCurrentIndex()].setPhoneNumber(value);
     
     std::cout << "Darkest Secret = ";
-    std::getline(std::cin, value);
+    if (!std::getline(std::cin, value))
+        exit(0);
     checkIsEmpty(value, "Darkest Secret cannot be left blank", "Darkest Secret = ");
     this->contact[getCurrentIndex()].setDarkestSecret(value);
 
@@ -113,8 +118,8 @@ void PhoneBook::searchContact()
     while (true)
     {
         std::cout << "Search index: ";
-        if (!std::getline(std::cin, input)) exit(0);
-
+        if (!std::getline(std::cin, input))
+            exit(0);
         index = std::atoi(input.c_str());
         if (index < 1 || index > 8)
         {
