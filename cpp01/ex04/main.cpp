@@ -34,15 +34,12 @@ int main(int ac, char **av)
     while (std::getline(inputFile, line))
     {
         size_t i = 0;
-        if (!s1.empty())
-        {
             while ((i = line.find(s1, i)) != std::string::npos)
             {
                 line.erase(i, s1.length());
                 line.insert(i, s2);
                 i += s2.length();
             }
-        }
         outFile << line;
         if (!inputFile.eof())
             outFile << std::endl;
