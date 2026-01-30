@@ -1,14 +1,13 @@
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main() {
-    std::cout << "--- ScavTrap Olusturuluyor ---" << std::endl;
-    ScavTrap scav("Serena"); // Önce ClapTrap sonra ScavTrap mesajı gelmeli 
+    std::cout << "--- FragTrap Olusturuluyor ---" << std::endl;
+    FragTrap frag("Kanka"); 
 
     std::cout << "\n--- Aksiyonlar ---" << std::endl;
-    scav.attack("Düsman");    // ScavTrap'e özel saldırı mesajı [cite: 156]
-    scav.guardGate();         // Özel yetenek [cite: 165, 166]
+    frag.attack("Düsman");
+    frag.highFivesGuys(); // Çak bir beşlik!
 
-    std::cout << "\n--- ScavTrap Yok Ediliyor ---" << std::endl;
-    // Kapsam dışına çıkınca önce ScavTrap sonra ClapTrap yıkıcıları çalışmalı 
+    std::cout << "\n--- FragTrap Yok Ediliyor ---" << std::endl;
     return 0; 
 }
