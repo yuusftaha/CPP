@@ -1,0 +1,37 @@
+#include "Dog.hpp"
+
+Dog::Dog()
+{
+    this->type = "Dog";
+    this->brain = new Brain();
+    std::cout << "Dog Default Constructor called" << std::endl;
+}
+
+Dog::Dog(const Dog &copy) : AAnimal(copy)
+{
+    this->brain = new Brain(*copy.brain);
+    std::cout << "Dog Copy Constructor called" << std::endl;
+}
+
+Dog &Dog::operator=(const Dog &assign)
+{
+    if (this != &assign)
+    {
+        AAnimal::operator=(assign);
+        delete this->brain;
+        this->brain = new Brain(*assign.brain);
+    }
+    std::cout << "Dog Copy Assignment Operator called" << std::endl;
+    return *this;
+}
+
+Dog::~Dog()
+{
+    delete this->brain;
+    std::cout << "Dog Destructor called" << std::endl;
+}
+
+void Dog::makeSound() const
+{
+    std::cout << "Havv Havvv" << std::endl;
+}
