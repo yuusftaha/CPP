@@ -6,7 +6,7 @@ int main() {
 
     std::cout << "\n--- Aksiyonlar ---" << std::endl;
     frag.attack("Düsman");
-    frag.highFivesGuys(); // Çak bir beşlik!
+    frag.highFivesGuys();
 
     std::cout << "\n--- FragTrap Yok Ediliyor ---" << std::endl;
     return 0; 
