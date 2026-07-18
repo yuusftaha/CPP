@@ -1,116 +1,59 @@
 #include "ScalarConverter.hpp"
 
-ScalarConverter::ScalarConverter()
-{
+// Sadece bir kere tanımlayıp her yerde kullanalım
+static void printAll(double val, bool impossible = false) {
+    if (impossible) {
+        std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n";
+        return;
+    }
+    // Char
+    std::cout << "char: ";
+    if (val < 0 || val > 255 || val != val) std::cout << "impossible\n";
+    else if (val < 32 || val == 127) std::cout << "Non displayable\n";
+    else std::cout << "'" << static_cast<char>(val) << "'\n";
 
+    // Int
+    std::cout << "int: ";
+    if (val < std::numeric_limits<int>::min() || val > std::numeric_limits<int>::max() || val != val)
+        std::cout << "impossible\n";
+    else std::cout << static_cast<int>(val) << "\n";
+
+    // Float & Double (Fixed precision kullanarak)
+    std::cout << std::fixed << std::setprecision(1);
+    std::cout << "float: " << static_cast<float>(val) << "f\n";
+    std::cout << "double: " << val << "\n";
 }
 
-ScalarConverter::ScalarConverter(const ScalarConverter &copy)
-{
-
-}
-
-ScalarConverter& ScalarConverter::operator=(const ScalarConverter &assing)
-{
-
-}
-
-void ScalarConverter::convert(std::string literal)
-{
-    if (literal.length() == 1 && !std::isdigit(literal[0]) && std::isprint(literal[0])) 
-        char c = literal[0]; 
-
-
-    bool isInt = true;
-    size_t i = 0;
-
-    if (literal[i] == '-' || literal[i] == '+')
-        i++;
-
-    if (i == literal.length()) 
-        isInt = false;
-
-    for (; isInt && i < literal.length(); i++) 
-    {
-        if (!std::isdigit(literal[i])) 
-        {
-            isInt = false;
-            break;
-        }
+void ScalarConverter::convert(std::string str) {
+    // 1. Bilimsel İfadeler (Bunlar için kendi mantığımızı kuruyoruz)
+    if (str == "nan" || str == "nanf") {
+        std::cout << "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan\n";
+        return;
     }
-    if (isInt)
-    {
-        long value = std::strtol(literal.c_str(), NULL, 10); 
-        if (value >= INT_MIN && value <= INT_MAX)
-            int intValue = static_cast<int>(value);
-        else
-            isInt = false; 
+    if (str == "+inf" || str == "+inff") {
+        std::cout << "char: impossible\nint: impossible\nfloat: +inff\ndouble: +inf\n";
+        return;
+    }
+    if (str == "-inf" || str == "-inff") {
+        std::cout << "char: impossible\nint: impossible\nfloat: -inff\ndouble: -inf\n";
+        return;
     }
 
-
-    bool isFloat = false;
-
-    if (literal == "nanf" || literal == "+inff" || literal == "-inff") 
-        isFloat = true;
-    else if (literal.length() > 1 && literal[literal.length() - 1] == 'f') 
-    {
-        int dotCount = 0;
-        bool validChars = true;
-        size_t i = 0;
-
-        if (literal[i] == '-' || literal[i] == '+') 
-            i++;
-        for (; i < literal.length() - 1; i++) 
-        {
-            if (literal[i] == '.') 
-                dotCount++;
-            else if (!std::isdigit(literal[i])) 
-            {
-                validChars = false;
-                break;
-            }
-        }
-        if (validChars && dotCount == 1) 
-            isFloat = true;
+    // 2. Kendi Parser Mantığımız (C++ stringstream ile daha kısa)
+    double val;
+    std::stringstream ss(str);
+    
+    // Eğer tek karakterse ve rakam değilse
+    if (str.length() == 1 && !std::isdigit(str[0]) && std::isprint(str[0])) {
+        printAll(static_cast<double>(str[0]));
+        return;
     }
 
-    if (isFloat) 
-    {
-        double tempValue = std::strtod(literal.c_str(), NULL);
-        float floatValue = static_cast<float>(tempValue);
+    // Eğer bir sayıysa (stringstream ile kontrol)
+    ss >> val;
+    if (ss.fail()) {
+        printAll(0, true);
+    } else {
+        printAll(val);
     }
-
-
-    bool isDouble = false;
-
-    if (literal == "nan" || literal == "+inf" || literal == "-inf") 
-        isDouble = true;
-    else 
-    {
-        int dotCount = 0;
-        size_t i = 0;
-        isDouble = true;
-
-        if (literal[i] == '-' || literal[i] == '+') 
-            i++;
-
-        if (i == literal.length()) 
-            isDouble = false;
-
-        for (; isDouble && i < literal.length(); i++) 
-        {
-            if (literal[i] == '.') 
-                dotCount++;
-            else if (!std::isdigit(literal[i])) 
-            {
-                isDouble = false; 
-                break; 
-            }
-        }
-        if (dotCount != 1) 
-            isDouble = false;
-    }
-
-    if (isDouble) 
-        double doubleValue = std::strtod(literal.c_str(), NULL);
 }

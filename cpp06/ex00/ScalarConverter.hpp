@@ -1,10 +1,11 @@
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
+#include <iostream>
 #include <string>
-#include <cctype>
-#include <cstdlib> // strtol (string to long)
-#include <climits> // INT_MAX, INT_MIN
+#include <sstream>
+#include <limits>
+#include <iomanip>
 
 class ScalarConverter
 {
