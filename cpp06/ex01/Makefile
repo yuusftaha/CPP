@@ -1,10 +1,10 @@
-NAME = ScalarConvert
+NAME = Serializer
 
 CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = ScalarConverter.cpp main.cpp
+SRCS = Serializer.cpp main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

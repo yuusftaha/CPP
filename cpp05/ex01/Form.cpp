@@ -64,7 +64,7 @@ void Form::beSigned(const Bureaucrat &b)
 {
 	if (this->sign_grade < b.getGrade())
 		throw Form::GradeTooLowException();
-	else
+	else 
 		this->sign = true;
 }
 
@@ -73,6 +73,6 @@ std::ostream& operator<<(std::ostream& os, const Form& f)
     os << "Form: " << f.getName() 
        << ", Status: " << (f.getSigned() ? "Signed" : "Not Signed")
        << ", Sign Grade required: " << f.getSignGrade()
-       << ", Execute Grade required: " << f.getExecuteGrade();
+       << ", Execute Grade required: " << f.getExecuteGrade() << std::endl;
     return os;
 }

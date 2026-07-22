@@ -12,8 +12,5 @@ int main()
     }
     std::cout << "\nTAMIR DENEMESI" << std::endl;
     robot.beRepaired(10);
-
-    std::cout << "\nTEST BITTI\n" << std::endl;
-
     return 0;
 }
