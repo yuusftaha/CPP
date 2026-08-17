@@ -1,4 +1,4 @@
-NAME = Array
+NAME = whatever
 
 CXX = c++
 

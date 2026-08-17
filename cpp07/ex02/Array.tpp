@@ -1,14 +1,13 @@
 #include"Array.hpp"
 
+template <typename T>
+Array<T>::Array() : elements(NULL), _size(0) {}
 
 template <typename T>
-Array<T>::Array() : elements(NULL), size(0) {}
+Array<T>::Array(unsigned int n) : elements(new T[n]()), _size(n) {}
 
 template <typename T>
-Array<T>::Array(unsigned int n) : elements(new T[n]()), size(n) {}
-
-template <typename T>
-Array<T>::Array(const Array<T>& other) : elements(NULL), size(0) 
+Array<T>::Array(const Array<T>& other) : elements(NULL), _size(0) 
 {
     *this = other;
 }
@@ -16,21 +15,21 @@ Array<T>::Array(const Array<T>& other) : elements(NULL), size(0)
 template <typename T>
 Array<T>& Array<T>::operator=(const Array<T>& other) 
 {
-    if (this != &other) {
-        if (elements) {
+    if (this != &other) 
+    {
+        if (elements)
             delete[] elements;
-        }
         
-        size = other.size;
+        _size = other._size;
         
-        if (size > 0) {
-            elements = new T[size]();
-            for (unsigned int i = 0; i < size; i++) {
+        if (_size > 0) 
+        {
+            elements = new T[_size]();
+            for (unsigned int i = 0; i < _size; i++)
                 elements[i] = other.elements[i];
-            }
-        } else {
+        } 
+        else
             elements = NULL;
-        }
     }
     return *this;
 }
@@ -38,15 +37,14 @@ Array<T>& Array<T>::operator=(const Array<T>& other)
 template <typename T>
 Array<T>::~Array() 
 {
-    if (elements) {
+    if (elements) 
         delete[] elements;
-    }
 }
 
 template <typename T>
 T& Array<T>::operator[](unsigned int index) 
 {
-    if (index >= size) {
+    if (index >= _size) {
         throw OutOfBoundsException();
     }
     return elements[index];
@@ -55,7 +53,7 @@ T& Array<T>::operator[](unsigned int index)
 template <typename T>
 const T& Array<T>::operator[](unsigned int index) const 
 {
-    if (index >= size) {
+    if (index >= _size) {
         throw OutOfBoundsException();
     }
     return elements[index];
@@ -64,11 +62,11 @@ const T& Array<T>::operator[](unsigned int index) const
 template <typename T>
 unsigned int Array<T>::size() const 
 {
-    return size;
+    return _size;
 }
 
 template <typename T>
 const char* Array<T>::OutOfBoundsException::what() const throw() 
 {
-    return "Hata: Dizi sinirlarinin disina cikildi (Out of bounds)!";
+    return "Error: Array index out of bounds!";
 }
