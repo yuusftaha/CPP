@@ -33,7 +33,7 @@ int main()
         std::cout << "Basarili! Listede bulundu: " << *it2 << std::endl;
         
         std::cout << "Olmayan bir sayiyi ariyoruz (100)..." << std::endl;
-        easyfind(lst, 100); // Bu satır hata fırlatacak
+        easyfind(lst, 100);
     } 
     catch (const std::exception& e) {
         std::cout << "HATA YAKALANDI: " << e.what() << std::endl;
